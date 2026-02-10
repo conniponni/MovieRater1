@@ -89,7 +89,7 @@ public class Director {
                 " | Birth year= " + birthYear +
                 "  \n | Nationality= '" + nationality + '\'' +
                 " \n | Number of Movies= " + numberOfMoviesDirected +
-                " | Active= " + active +
+                " | Active today= " + active +
                 '}';
     }
 }

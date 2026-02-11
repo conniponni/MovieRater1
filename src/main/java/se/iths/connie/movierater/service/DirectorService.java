@@ -4,16 +4,20 @@ import org.springframework.stereotype.Service;
 import se.iths.connie.movierater.exception.DirectorNotFoundException;
 import se.iths.connie.movierater.model.Director;
 import se.iths.connie.movierater.repository.DirectorRepository;
+import se.iths.connie.movierater.validator.DirectorValidator;
 
 import java.util.List;
 
 @Service
 public class DirectorService {
 
+    private DirectorValidator directorValidator;
+
     private final DirectorRepository directorRepository;
 
-    public DirectorService(DirectorRepository directorRepository) {
+    public DirectorService(DirectorRepository directorRepository, DirectorValidator directorValidator) {
         this.directorRepository = directorRepository;
+        this.directorValidator = directorValidator;
     }
 
     public List<Director> getAllDirectors() {
@@ -21,6 +25,7 @@ public class DirectorService {
     }
 
     public Director createDirector(Director director) {
+        directorValidator.validate(director);
         return directorRepository.save(director);
     }
 

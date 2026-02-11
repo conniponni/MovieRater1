@@ -1,11 +1,13 @@
 package se.iths.connie.movierater.service;
 
+import org.springframework.stereotype.Service;
 import se.iths.connie.movierater.exception.DirectorNotFoundException;
 import se.iths.connie.movierater.model.Director;
 import se.iths.connie.movierater.repository.DirectorRepository;
 
 import java.util.List;
 
+@Service
 public class DirectorService {
 
     private final DirectorRepository directorRepository;

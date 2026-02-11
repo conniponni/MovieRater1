@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Movie</title>
+</head>
+<body>
+
+<h1 th:text="${movie.title}"></h1>
+
+<p>Genre: <span th:text="${movie.genre}"></span></p>
+
+<p>Year: <span th:text="${movie.releaseYear}"></span></p>
+
+<p>Duration: <span th:text="${movie.durationMinutes}"></span></p>
+
+<p>Rating: <span th:text="${movie.rating}"></span></p>
+
+<a href="/movies">Back</a>
+
+</body>
+</html>

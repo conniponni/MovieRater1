@@ -4,13 +4,14 @@ import org.springframework.stereotype.Service;
 import se.iths.connie.movierater.exception.ReviewNotFoundException;
 import se.iths.connie.movierater.model.Review;
 import se.iths.connie.movierater.repository.ReviewRepository;
-import se.iths.connie.movierater.validator.ReviewValidator;
+// import se.iths.connie.movierater.validator.ReviewValidator;
 
 import java.util.List;
 
 @Service
 public class ReviewService {
 
+    /*
     private final ReviewRepository reviewRepository;
     private final ReviewValidator reviewValidator;
 
@@ -54,4 +55,6 @@ public class ReviewService {
                 .orElseThrow(() -> new ReviewNotFoundException(id));
         reviewRepository.deleteById(id);
     }
+
+     */
 }

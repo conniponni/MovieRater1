@@ -1,7 +1,7 @@
 package se.iths.connie.movierater.validator;
 
-
 import org.springframework.stereotype.Component;
+import se.iths.connie.movierater.exception.MovieValidationException;
 import se.iths.connie.movierater.model.Movie;
 
 @Component
@@ -21,10 +21,6 @@ public class MovieValidator {
         if (title == null || title.trim().isEmpty()) {
             throw new MovieValidationException("Title cannot be empty");
         }
-
-        if (title.length() > 100) {
-            throw new MovieValidationException("Title cannot exceed 100 characters");
-        }
     }
 
     public void validateGenre(String genre) {
@@ -32,38 +28,26 @@ public class MovieValidator {
         if (genre == null || genre.trim().isEmpty()) {
             throw new MovieValidationException("Genre cannot be empty");
         }
-
-        if (genre.length() > 50) {
-            throw new MovieValidationException("Genre cannot exceed 50 characters");
-        }
     }
 
     public void validateReleaseYear(int year) {
 
-        if (year < 1888) {
-            throw new MovieValidationException("Release year cannot be before 1888");
-        }
-
-        if (year > 2100) {
-            throw new MovieValidationException("Release year invalid");
+        if (year < 1888 || year > 2100) {
+            throw new MovieValidationException("Invalid release year");
         }
     }
 
     public void validateDurationMinutes(int duration) {
 
         if (duration <= 0) {
-            throw new MovieValidationException("Duration must be positive");
-        }
-
-        if (duration > 500) {
-            throw new MovieValidationException("Duration too large");
+            throw new MovieValidationException("Invalid duration");
         }
     }
 
     public void validateRating(double rating) {
 
-        if (rating < 0.0 || rating > 10.0) {
-            throw new MovieValidationException("Rating must be between 0 and 10");
+        if (rating < 0 || rating > 10) {
+            throw new MovieValidationException("Invalid rating");
         }
     }
 }

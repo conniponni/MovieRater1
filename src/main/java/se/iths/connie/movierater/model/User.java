@@ -21,7 +21,7 @@ public class User {
     @Column(nullable = false, unique = true)
     private String email;
 
-    public long getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
@@ -51,5 +51,10 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    @Override
+    public String toString() {
+        return "Username: " + username + ", Email: " + email + " (User Id: " + userId + ")";
     }
 }

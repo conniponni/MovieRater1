@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Directors</title>
+</head>
+<body>
+<h1>All directors</h1>
+<ul>
+    <li th:each="director : ${directors}">
+        <span th:text="${director.name}"></span>
+        <a th:href="@{/directors/{id}(id=${director.id})}">Show info</a>
+        <span> - </span>
+        <a th:href="@{/directors/{id}/edit(id=${director.id})}">Update</a>
+
+        <form th:action="@{/directors/{id}(id=${director.id})}" method="post" style="display: inline">
+            <input type="hidden" name="_method" value="DELETE">
+            <button type="submit">Delete director</button>
+        </form>
+    </li>
+    <a th:href="@{/directors/new}">Create new director</a>
+</ul>
+
+</body>
+</html>

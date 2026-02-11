@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Update director</title>
+</head>
+<body>
+<h1>Update director</h1>
+
+<form method="post" th:action="@{/directors/{id}(id=${director.id})}">
+    <input type="hidden" name="_method" value="PUT">
+    <p>
+        <label>Name: </label>
+        <input type="text" name="name"
+               th:value="${director.name}">
+    </p>
+    <p>
+        <label>Birth year: </label>
+        <input type="number" name="year"
+               th:value="${director.birthYear}">
+    </p>
+    <p>
+        <label>Nationality: </label>
+        <input type="text" name="nationality"
+               th:value="${director.nationality}">
+    </p>
+    <p>
+        <label>Number of movies directed: </label>
+        <input type="number" name="movies"
+               th:value="${director.numberOfMoviesDirected}">
+    </p>
+    <p>
+        <label>Active today: </label>
+        <input type="checkbox" name="active"
+               th:value="${director.active}">
+    </p>
+    <button type="submit">Save updated director</button>
+</form>
+
+</body>
+</html>

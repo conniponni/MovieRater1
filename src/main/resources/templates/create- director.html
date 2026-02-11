@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create director</title>
+</head>
+<body>
+<h1> Create new director here</h1>
+<form method="post" th:action="@{/directors}">
+    <p>
+        <label>Name: </label>
+        <input type="text" name="name">
+    </p>
+    <p>
+        <label>Birth year: </label>
+        <input type="number" name="year">
+    </p>
+    <p>
+        <label>Nationality: </label>
+        <input type="text" name="nationality">
+    </p>
+    <p>
+        <label>Number of movies directed: </label>
+        <input type="number" name="movies">
+    </p>
+    <p>
+        <label>Active today: </label>
+        <input type="checkbox" name="active">
+    </p>
+    <button type="submit">Save director</button>
+</form>
+
+</body>
+</html>

@@ -5,6 +5,7 @@ import se.iths.connie.movierater.exception.DuplicateFoundException;
 import se.iths.connie.movierater.exception.UserNotFoundException;
 import se.iths.connie.movierater.model.User;
 import se.iths.connie.movierater.repository.UserRepository;
+import se.iths.connie.movierater.validator.UserValidator;
 
 import java.util.List;
 import java.util.Optional;
@@ -12,13 +13,18 @@ import java.util.Optional;
 @Service
 public class UserService {
 
+
+    private final UserValidator userValidator;
     private final UserRepository userRepository;
 
-    public UserService(UserRepository userRepository) {
+    public UserService(UserValidator userValidator, UserRepository userRepository) {
+        this.userValidator = userValidator;
         this.userRepository = userRepository;
     }
 
     public User createUser(User user) {
+        userValidator.validate(user);
+
         if (userRepository.findByUsername(user.getUsername()).isPresent()) {
             throw new DuplicateFoundException("Username: " + user.getUsername() + " already exists");
         }

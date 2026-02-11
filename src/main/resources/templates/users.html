@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>All Users</title>
+</head>
+<body>
+<h1>Users</h1>
+<ul>
+    <li th:each="user : ${users}">
+        <span th:text="${user.username}"></span>
+        <a th:href="@{/users/{id}(id=${user.userId})}">Show info</a>
+        <span> - </span>
+        <a th:href="@{/users/{id}/update(id=${user.userId})}">Update user</a>
+
+        <form th:action="@{/users/{id}(id=${user.userId})}" method="post" style="display:inline">
+            <input type="hidden" name="_method" value="DELETE">
+            <button type="submit">DELETE</button>
+
+        </form>
+    </li>
+</ul>
+<p>
+    <a href="/users/add">Add user </a>
+</p>
+
+</body>
+</html>

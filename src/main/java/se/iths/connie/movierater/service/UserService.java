@@ -8,7 +8,6 @@ import se.iths.connie.movierater.repository.UserRepository;
 import se.iths.connie.movierater.validator.UserValidator;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class UserService {
@@ -40,23 +39,37 @@ public class UserService {
         userRepository.deleteById(id);
     }
 
+    public User updateUser(Long id, User user) {
+        userRepository.findById(id)
+                .orElseThrow(() -> new UserNotFoundException("User not found"));
+
+        user.setUserId(id);
+        userValidator.validate(user);
+
+        userRepository.findByUsername(user.getUsername()).ifPresent(found -> {
+            if (!found.getUserId().equals(id)) {
+                throw new DuplicateFoundException("Username: " + user.getUsername() + " already exists");
+            }
+        });
+        userRepository.findByEmail(user.getEmail()).ifPresent(found -> {
+            if (!found.getUserId().equals(id)) {
+                throw new DuplicateFoundException("Email: " + user.getEmail() + " already exists");
+            }
+        });
+
+        return userRepository.save(user);
+    }
+
 
     public List<User> findAllUsers() {
         return userRepository.findAll();
     }
 
-    public User findUserByUsername(String username) {
-        return userRepository.findByUsername(username)
-                .orElseThrow(() -> new UserNotFoundException("Username not found"));
-    }
 
-    public User findUserByEmail(String email) {
-        return userRepository.findByEmail(email).
-                orElseThrow(() -> new UserNotFoundException("Email not found"));
-    }
+    public User findUserById(Long id) {
+        return userRepository.findById(id).
+                orElseThrow(() -> new UserNotFoundException("User not found"));
 
-    public Optional<User> findUserById(Long id) {
-        return userRepository.findById(id);
     }
 
 

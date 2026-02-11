@@ -2,6 +2,7 @@ package se.iths.connie.movierater.service;
 
 import org.springframework.stereotype.Service;
 import se.iths.connie.movierater.exception.DuplicateFoundException;
+import se.iths.connie.movierater.exception.UserNotFoundException;
 import se.iths.connie.movierater.model.User;
 import se.iths.connie.movierater.repository.UserRepository;
 
@@ -28,6 +29,8 @@ public class UserService {
     }
 
     public void deleteUserById(Long id) {
+        userRepository.findById(id)
+                .orElseThrow(() -> new UserNotFoundException("User not found"));
         userRepository.deleteById(id);
     }
 
@@ -36,12 +39,14 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public Optional<User> findUserByUsername(String username) {
-        return userRepository.findByUsername(username);
+    public User findUserByUsername(String username) {
+        return userRepository.findByUsername(username)
+                .orElseThrow(() -> new UserNotFoundException("Username not found"));
     }
 
-    public Optional<User> findUserByEmail(String email) {
-        return userRepository.findByEmail(email);
+    public User findUserByEmail(String email) {
+        return userRepository.findByEmail(email).
+                orElseThrow(() -> new UserNotFoundException("Email not found"));
     }
 
     public Optional<User> findUserById(Long id) {

@@ -22,7 +22,7 @@ public class UserService {
     }
 
     public User createUser(User user) {
-        userValidator.validate(user);
+        userValidator.validateUser(user);
 
         if (userRepository.findByUsername(user.getUsername()).isPresent()) {
             throw new DuplicateFoundException("Username: " + user.getUsername() + " already exists");
@@ -44,7 +44,7 @@ public class UserService {
                 .orElseThrow(() -> new UserNotFoundException("User not found"));
 
         user.setUserId(id);
-        userValidator.validate(user);
+        userValidator.validateUser(user);
 
         userRepository.findByUsername(user.getUsername()).ifPresent(found -> {
             if (!found.getUserId().equals(id)) {

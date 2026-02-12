@@ -9,7 +9,7 @@ import java.time.LocalDate;
 @Component
 public class DirectorValidator {
 
-    public void validate(Director director) {
+    public void validateDirector(Director director) {
 
         validateName(director.getName());
         validateBirthYear(director.getBirthYear());

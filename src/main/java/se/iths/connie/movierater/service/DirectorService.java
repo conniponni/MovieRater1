@@ -25,7 +25,7 @@ public class DirectorService {
     }
 
     public Director createDirector(Director director) {
-        directorValidator.validate(director);
+        directorValidator.validateDirector(director);
         return directorRepository.save(director);
     }
 

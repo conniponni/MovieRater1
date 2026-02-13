@@ -138,7 +138,7 @@ public class UserServiceTest {
     public void testCreateDuplicatesUsernameThrowsException() {
         duplicateUser.setUsername("username");
 
-        when(userRepository.findByUsername("username")).thenReturn(Optional.of(duplicateUser));
+        when(userRepository.findByUsername("username")).thenReturn(Optional.of(user));
 
         assertThrows(DuplicateFoundException.class, () -> userService.createUser(duplicateUser));
         verify(userValidator).validate(duplicateUser);

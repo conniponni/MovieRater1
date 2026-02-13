@@ -3,6 +3,7 @@ package se.iths.connie.movierater.validator;
 
 import org.springframework.stereotype.Component;
 import se.iths.connie.movierater.exception.MissingRequiredFieldException;
+import se.iths.connie.movierater.exception.ValidationException;
 import se.iths.connie.movierater.model.User;
 
 @Component
@@ -11,7 +12,7 @@ public class UserValidator {
 
     public void validateUser(User user) {
         if (user == null) {
-            throw new IllegalArgumentException("User cant be null");
+            throw new ValidationException("User cant be null");
         }
         validateUsername(user.getUsername());
         validateEmail(user.getEmail());
@@ -32,7 +33,7 @@ public class UserValidator {
             throw new MissingRequiredFieldException("Email cannot be empty");
         }
         if (!email.contains("@") || !email.contains(".")) {
-            throw new IllegalArgumentException("Email is not valid");
+            throw new ValidationException("Email is not valid");
         }
     }
 
@@ -44,22 +45,22 @@ public class UserValidator {
 
     private void validateUsernameLength(String username) {
         if (username.length() <= 3) {
-            throw new IllegalArgumentException("Username length should be at least 3 characters");
+            throw new ValidationException("Username length should be at least 3 characters");
         }
         if (username.length() > 20) {
-            throw new IllegalArgumentException("Username length must be at most 20 characters");
+            throw new ValidationException("Username length must be at most 20 characters");
         }
     }
 
     private void validatePasswordLength(String password) {
         if (password.length() < 8) {
-            throw new IllegalArgumentException("Password length should be at least 8 characters");
+            throw new ValidationException("Password length should be at least 8 characters");
         }
     }
 
     private void validateEmailLength(String email) {
         if (email.length() > 50) {
-            throw new IllegalArgumentException("Email length must be at most 50 characters");
+            throw new ValidationException("Email length must be at most 50 characters");
         }
 
     }

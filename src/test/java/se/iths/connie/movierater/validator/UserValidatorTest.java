@@ -3,6 +3,7 @@ package se.iths.connie.movierater.validator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import se.iths.connie.movierater.exception.MissingRequiredFieldException;
+import se.iths.connie.movierater.exception.ValidationException;
 import se.iths.connie.movierater.model.User;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
@@ -36,7 +37,7 @@ public class UserValidatorTest {
 
     @Test
     public void testExceptionIfUserIsNull() {
-        assertThrows(IllegalArgumentException.class, () -> userValidator.validateUser(null));
+        assertThrows(ValidationException.class, () -> userValidator.validateUser(null));
     }
 
 
@@ -60,7 +61,7 @@ public class UserValidatorTest {
     public void testExceptionIfPasswordTooShort() {
         user.setPassword("a".repeat(7));
 
-        assertThrows(IllegalArgumentException.class, () -> {
+        assertThrows(ValidationException.class, () -> {
             userValidator.validateUser(user);
         });
     }
@@ -87,7 +88,7 @@ public class UserValidatorTest {
     public void testExceptionIfUsernameTooShort() {
         user.setUsername("a".repeat(3));
 
-        assertThrows(IllegalArgumentException.class, () -> {
+        assertThrows(ValidationException.class, () -> {
             userValidator.validateUser(user);
         });
     }
@@ -96,7 +97,7 @@ public class UserValidatorTest {
     public void testExceptionIfUsernameTooLong() {
         user.setUsername("a".repeat(21));
 
-        assertThrows(IllegalArgumentException.class, () -> {
+        assertThrows(ValidationException.class, () -> {
             userValidator.validateUser(user);
         });
     }
@@ -123,7 +124,7 @@ public class UserValidatorTest {
     public void testExceptionIfEmailTooLong() {
         user.setEmail("@.".repeat(51));
 
-        assertThrows(IllegalArgumentException.class, () -> {
+        assertThrows(ValidationException.class, () -> {
             userValidator.validateUser(user);
         });
     }
@@ -133,7 +134,7 @@ public class UserValidatorTest {
     public void testExceptionIfEmailMissingAT() {
         user.setEmail("armin.example.com");
 
-        assertThrows(IllegalArgumentException.class, () -> {
+        assertThrows(ValidationException.class, () -> {
             userValidator.validateUser(user);
         });
 
@@ -142,7 +143,7 @@ public class UserValidatorTest {
     @Test
     public void testExceptionIfEmailMissingDOT() {
         user.setEmail("armin@example@com");
-        assertThrows(IllegalArgumentException.class, () -> {
+        assertThrows(ValidationException.class, () -> {
             userValidator.validateUser(user);
         });
     }

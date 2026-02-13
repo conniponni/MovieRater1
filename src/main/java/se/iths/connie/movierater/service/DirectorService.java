@@ -35,11 +35,15 @@ public class DirectorService {
     }
 
     public Director updateDirector(Long id, Director director) {
+        directorRepository.findById(id)
+                .orElseThrow(() -> new DirectorNotFoundException("There is no director with id: " + id));
         director.setId(id);
         return directorRepository.save(director);
     }
 
     public void deleteDirector(Long id) {
+        directorRepository.findById(id)
+                .orElseThrow(() -> new DirectorNotFoundException("There is no director with id: " + id));
         directorRepository.deleteById(id);
     }
 

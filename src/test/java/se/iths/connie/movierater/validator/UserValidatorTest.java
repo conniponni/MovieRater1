@@ -32,12 +32,12 @@ public class UserValidatorTest {
 
     @Test
     public void testUserIsValid() {
-        assertDoesNotThrow(() -> userValidator.validateUser(user));
+        assertDoesNotThrow(() -> userValidator.validate(user));
     }
 
     @Test
     public void testExceptionIfUserIsNull() {
-        assertThrows(ValidationException.class, () -> userValidator.validateUser(null));
+        assertThrows(ValidationException.class, () -> userValidator.validate(null));
     }
 
 
@@ -46,7 +46,7 @@ public class UserValidatorTest {
         user.setPassword("");
 
         assertThrows(MissingRequiredFieldException.class, () -> {
-            userValidator.validateUser(user);
+            userValidator.validate(user);
         });
     }
 
@@ -54,7 +54,7 @@ public class UserValidatorTest {
     public void testExceptionIfPasswordIsNull() {
         user.setPassword(null);
 
-        assertThrows(MissingRequiredFieldException.class, () -> userValidator.validateUser(user));
+        assertThrows(MissingRequiredFieldException.class, () -> userValidator.validate(user));
     }
 
     @Test
@@ -62,7 +62,7 @@ public class UserValidatorTest {
         user.setPassword("a".repeat(7));
 
         assertThrows(ValidationException.class, () -> {
-            userValidator.validateUser(user);
+            userValidator.validate(user);
         });
     }
 
@@ -71,7 +71,7 @@ public class UserValidatorTest {
         user.setUsername("");
 
         assertThrows(MissingRequiredFieldException.class, () -> {
-            userValidator.validateUser(user);
+            userValidator.validate(user);
         });
     }
 
@@ -80,7 +80,7 @@ public class UserValidatorTest {
         user.setUsername(null);
 
         assertThrows(MissingRequiredFieldException.class, () -> {
-            userValidator.validateUser(user);
+            userValidator.validate(user);
         });
     }
 
@@ -89,7 +89,7 @@ public class UserValidatorTest {
         user.setUsername("a".repeat(3));
 
         assertThrows(ValidationException.class, () -> {
-            userValidator.validateUser(user);
+            userValidator.validate(user);
         });
     }
 
@@ -98,7 +98,7 @@ public class UserValidatorTest {
         user.setUsername("a".repeat(21));
 
         assertThrows(ValidationException.class, () -> {
-            userValidator.validateUser(user);
+            userValidator.validate(user);
         });
     }
 
@@ -107,7 +107,7 @@ public class UserValidatorTest {
         user.setEmail("");
 
         assertThrows(MissingRequiredFieldException.class, () -> {
-            userValidator.validateUser(user);
+            userValidator.validate(user);
         });
     }
 
@@ -116,7 +116,7 @@ public class UserValidatorTest {
         user.setEmail(null);
 
         assertThrows(MissingRequiredFieldException.class, () -> {
-            userValidator.validateUser(user);
+            userValidator.validate(user);
         });
     }
 
@@ -125,7 +125,7 @@ public class UserValidatorTest {
         user.setEmail("@.".repeat(51));
 
         assertThrows(ValidationException.class, () -> {
-            userValidator.validateUser(user);
+            userValidator.validate(user);
         });
     }
 
@@ -135,7 +135,7 @@ public class UserValidatorTest {
         user.setEmail("armin.example.com");
 
         assertThrows(ValidationException.class, () -> {
-            userValidator.validateUser(user);
+            userValidator.validate(user);
         });
 
     }
@@ -144,7 +144,7 @@ public class UserValidatorTest {
     public void testExceptionIfEmailMissingDOT() {
         user.setEmail("armin@example@com");
         assertThrows(ValidationException.class, () -> {
-            userValidator.validateUser(user);
+            userValidator.validate(user);
         });
     }
 

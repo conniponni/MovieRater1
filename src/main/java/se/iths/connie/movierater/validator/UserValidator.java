@@ -10,7 +10,7 @@ import se.iths.connie.movierater.model.User;
 public class UserValidator {
 
 
-    public void validateUser(User user) {
+    public void validate(User user) {
         if (user == null) {
             throw new ValidationException("User cant be null");
         }

@@ -40,23 +40,23 @@ public class UserService {
     }
 
     public User updateUser(Long id, User user) {
-        userRepository.findById(id)
+        User existingUser = userRepository.findById(id)
                 .orElseThrow(() -> new UserNotFoundException("User not found"));
 
         user.setUserId(id);
         userValidator.validate(user);
 
-        userRepository.findByUsername(user.getUsername()).ifPresent(found -> {
-            if (!found.getUserId().equals(id)) {
+
+        if (!user.getUsername().equals(existingUser.getUsername())) {
+            if (userRepository.findByUsername(user.getUsername()).isPresent()) {
                 throw new DuplicateFoundException("Username: " + user.getUsername() + " already exists");
             }
-        });
-        userRepository.findByEmail(user.getEmail()).ifPresent(found -> {
-            if (!found.getUserId().equals(id)) {
+        }
+        if (!user.getEmail().equals(existingUser.getEmail())) {
+            if (userRepository.findByEmail(user.getEmail()).isPresent()) {
                 throw new DuplicateFoundException("Email: " + user.getEmail() + " already exists");
             }
-        });
-
+        }
         return userRepository.save(user);
     }
 

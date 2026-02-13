@@ -19,37 +19,37 @@ public class MovieValidatorTest {
     }
 
     @Test
-    void validateMovie_validMovie_passes() {
+    void validateMovieAndMoviePasses() {
         Movie movie = new Movie("Title", "Genre", 2020, 120, 8.5);
         assertDoesNotThrow(() -> validator.validateMovie(movie));
     }
 
     @Test
-    void validateTitle_empty_throwsException() {
+    void validateTitleEmptyThrowsException() {
         assertThrows(MovieValidationException.class,
                 () -> validator.validateTitle(""));
     }
 
     @Test
-    void validateGenre_empty_throwsException() {
+    void validateGenreEmptyThrowsException() {
         assertThrows(MovieValidationException.class,
                 () -> validator.validateGenre(""));
     }
 
     @Test
-    void validateReleaseYear_invalid_throwsException() {
+    void validateReleaseYearInvalidThrowsException() {
         assertThrows(MovieValidationException.class,
                 () -> validator.validateReleaseYear(1700));
     }
 
     @Test
-    void validateDuration_invalid_throwsException() {
+    void validateDurationInvalidThrowsException() {
         assertThrows(MovieValidationException.class,
                 () -> validator.validateDurationMinutes(0));
     }
 
     @Test
-    void validateRating_invalid_throwsException() {
+    void validateRatingInvalidThrowsException() {
         assertThrows(MovieValidationException.class,
                 () -> validator.validateRating(20));
     }

@@ -1,10 +1,9 @@
-package se.iths.connie.movierater;
+package se.iths.connie.movierater.validator;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import se.iths.connie.movierater.exception.MovieValidationException;
 import se.iths.connie.movierater.model.Movie;
-import se.iths.connie.movierater.validator.MovieValidator;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;

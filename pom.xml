@@ -10,7 +10,7 @@
     </parent>
     <groupId>se.iths.connie</groupId>
     <artifactId>MovieRater</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0</version>
     <name>MovieRater</name>
     <description>MovieRater</description>
     <url/>

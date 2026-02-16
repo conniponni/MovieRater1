@@ -12,11 +12,11 @@ public class Director {
     private Long id;
     @Column(nullable = false)
     private String name;
-    @Column(nullable = false)
+    @Column(nullable = false, name = "birthyear")
     private int birthYear;
     @Column(nullable = false)
     private String nationality;
-    @Column(nullable = false)
+    @Column(nullable = false, name = "numberofmoviesdirected")
     private int numberOfMoviesDirected;
     @Column(nullable = false)
     private boolean active;

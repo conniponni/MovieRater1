@@ -11,12 +11,30 @@ Connie Karlzen, Armin Akhtarzand, Ervin Torok, Josefine Berglund.
 
 # Projektstart:
 
-Vi röstade alla på ett tema först, sedan kom vi fram till ett system för filmklassificering.
-Vi skapade ett dokument där vi delade in klasser och struktur som behövdes från var och en av oss.
-Vi började arbeta med entiteter och gjorde tester till slut.
-Genom hela processen såg vi till att vi var synkroniserade med våra uppgifter,
-körde pulls samtidigt och frågade om vi tittade på samma ändringar.
-Allt fungerade väldigt bra mellan oss, med minimala fel här och där som var lätta att åtgärda.
+Projektet är en Spring Boot-applikation som körs i en Docker-container och driftsätts i molnet via Koyeb.
+
+Lokalt startas applikationen genom att projektet först byggs med Maven och därefter körs via IDE. För att applikationen
+ska fungera krävs att miljövariabler för databasen är korrekt inställda, exempelvis URL, användarnamn och lösenord.
+Dessa används för att ansluta till vår PostgreSQL-databas som ligger i molnet via Neon. Genom att använda miljövariabler
+undviker vi att hårdkoda känslig information i koden.
+
+När applikationen ska driftsättas paketeras den som en Docker image. Docker gör att hela applikationen körs i en
+isolerad miljö, vilket innebär att den fungerar på samma sätt oavsett var den startas. Den färdiga imagen laddas upp och
+används av Koyeb, som startar containern och gör applikationen tillgänglig via en publik webbadress. I Koyeb
+konfigureras miljövariablerna direkt i plattformens inställningar.
+ 
+------
+
+När applikationen startas möts användaren av en startsida. Den fungerar som en ingångspunkt till systemet och innehåller
+navigeringsval till de olika delarna: User, Movie, Review och Director.
+
+Varje alternativ leder vidare till sin egen del av applikationen där användaren kan hantera information kopplad till
+respektive entitet. I varje del visas en lista över befintliga objekt. Det finns även möjlighet att skapa nya objekt
+samt uppdatera eller radera befintliga.
+
+Varje entitet har egna regler och krav på vilka attribut som måste anges vid skapande eller uppdatering. Dessa regler
+hanteras i applikationens affärslogik och validering för att säkerställa att endast korrekt och giltig data sparas i
+databasen.
 
 # Miljövariabler:
 

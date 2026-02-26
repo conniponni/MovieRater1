@@ -11,33 +11,27 @@ import java.util.List;
 
 @Service
 public class MovieService {
-
     private final MovieRepository movieRepository;
     private final MovieValidator movieValidator;
 
     public MovieService(MovieRepository movieRepository,
                         MovieValidator movieValidator) {
-
         this.movieRepository = movieRepository;
         this.movieValidator = movieValidator;
     }
 
     public List<Movie> getAllMovies() {
-
         return movieRepository.findAll();
     }
 
     public Movie getMovieById(Long id) {
-
         return movieRepository.findById(id)
                 .orElseThrow(() ->
                         new MovieNotFoundException("Movie not found with id: " + id));
     }
 
     public Movie createMovie(Movie movie) {
-
         movieValidator.validateMovie(movie);
-
         return movieRepository.save(movie);
     }
 
@@ -54,12 +48,10 @@ public class MovieService {
         existingMovie.setReleaseYear(updatedMovie.getReleaseYear());
         existingMovie.setDurationMinutes(updatedMovie.getDurationMinutes());
         existingMovie.setRating(updatedMovie.getRating());
-
         return movieRepository.save(existingMovie);
     }
 
     public void deleteMovie(Long id) {
-
         Movie movie = movieRepository.findById(id)
                 .orElseThrow(() ->
                         new MovieNotFoundException("Movie not found with id: " + id));

@@ -46,6 +46,4 @@ public class DirectorService {
                 .orElseThrow(() -> new DirectorNotFoundException("There is no director with id: " + id));
         directorRepository.deleteById(id);
     }
-
-
 }
